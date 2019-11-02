@@ -1,5 +1,6 @@
 package edu.austral.starship;
 
+import edu.austral.starship.base.collision.CollisionEngine;
 import edu.austral.starship.base.framework.GameFramework;
 import edu.austral.starship.base.framework.ImageLoader;
 import edu.austral.starship.base.framework.WindowSettings;
@@ -15,16 +16,20 @@ import java.util.Set;
 
 public class CustomGameFramework implements GameFramework {
 
-    List<Entity> entities = new ArrayList<>();
-    ShipController shipController;
-    int MAX_WIDTH = 1000;
-    int MAX_HEIGHT = 1000;
+    private List<Entity> entities;
+    private ShipController shipController;
+    private CollisionEngine<Entity> collisionEngine;
+    private int MAX_WIDTH = 1000;
+    private int MAX_HEIGHT = 1000;
 
     @Override
     public void setup(WindowSettings windowsSettings, ImageLoader imageLoader) {
         windowsSettings
                 .setSize(MAX_WIDTH, MAX_HEIGHT);
+        entities = new ArrayList<>();
+        collisionEngine = new CollisionEngine<Entity>();
         shipController = new ShipController();
+        entities.add(shipController);
         for (int i = 0; i < 3; i++) {
             Entity entity = new AsteroidController();
             entities.add(entity);
@@ -49,11 +54,11 @@ public class CustomGameFramework implements GameFramework {
             shipController.moveRight();
         }
 
+        collisionEngine.checkCollisions(entities);
 
         graphics.background(80);
 
-        shipController.move();
-        shipController.draw(graphics);
+
         for (Entity entity : entities) {
             if (entity.isInsideScreen(MAX_HEIGHT, MAX_WIDTH)) {
                 entity.pushIn(MAX_HEIGHT, MAX_WIDTH);
