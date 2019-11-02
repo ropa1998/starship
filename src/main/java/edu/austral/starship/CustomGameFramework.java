@@ -17,8 +17,8 @@ public class CustomGameFramework implements GameFramework {
 
     List<Entity> entities = new ArrayList<>();
     ShipController shipController;
-    int MAX_WIDTH = 500;
-    int MAX_HEIGHT = 500;
+    int MAX_WIDTH = 1000;
+    int MAX_HEIGHT = 1000;
 
     @Override
     public void setup(WindowSettings windowsSettings, ImageLoader imageLoader) {
@@ -29,7 +29,6 @@ public class CustomGameFramework implements GameFramework {
             Entity entity = new AsteroidController();
             entities.add(entity);
         }
-        entities.add(shipController);
     }
 
     @Override
@@ -53,10 +52,11 @@ public class CustomGameFramework implements GameFramework {
 
         graphics.background(80);
 
-
+        shipController.move();
+        shipController.draw(graphics);
         for (Entity entity : entities) {
             if (entity.isInsideScreen(MAX_HEIGHT, MAX_WIDTH)) {
-                entity.pushIn();
+                entity.pushIn(MAX_HEIGHT, MAX_WIDTH);
             }
             entity.move();
             entity.draw(graphics);

@@ -27,7 +27,7 @@ public abstract class Controller implements Entity {
         return model.isInsideScreen(max_height, max_width);
     }
 
-    public void pushIn(){
-        model.pushIn();
+    public void pushIn(int MAX_HEIGHT, int MAX_WIDTH){
+        model.pushIn(MAX_HEIGHT, MAX_WIDTH);
     }
 }

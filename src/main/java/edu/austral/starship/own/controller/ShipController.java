@@ -21,27 +21,27 @@ public class ShipController extends Controller implements Maneuvrable {
 
     @Override
     public void moveForward() {
-        this.model.setAppliedVector(Vector2.vector(0,-10));
+        this.model.setAppliedVector(model.getAppliedVector().add(Vector2.vector(0, -10)));
     }
 
     @Override
     public void moveBackward() {
-        this.model.setAppliedVector(Vector2.vector(0,10));
+        this.model.setAppliedVector(model.getAppliedVector().add(Vector2.vector(0, 10)));
     }
 
     @Override
     public void moveLeft() {
-        this.model.setAppliedVector(Vector2.vector(-10, 0));
+        this.model.setAppliedVector(model.getAppliedVector().add(Vector2.vector(-10, 0)));
     }
 
     @Override
     public void moveRight() {
-        this.model.setAppliedVector(Vector2.vector(10, 0));
+        this.model.setAppliedVector(model.getAppliedVector().add(Vector2.vector(10, 0)));
     }
 
     @Override
     public void move() {
         this.model.move();
-        this.model.setAppliedVector(this.model.getAppliedVector().multiply((float) 0.9));
+        this.model.setAppliedVector(this.model.getAppliedVector().multiply((float) 0.4));
     }
 }

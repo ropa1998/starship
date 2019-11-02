@@ -45,11 +45,11 @@ public abstract class Model {
         return position.getX() > max_width || position.getX() < 0 || position.getY() > max_height || position.getY() < 0;
     }
 
-    public void pushIn() {
+    public void pushIn(int MAX_HEIGHT, int MAX_WIDTH) {
         boolean left = position.getX() < 0;
-        boolean right = position.getX() > 500 - 100;
+        boolean right = position.getX() > MAX_WIDTH - 100;
         boolean up = position.getY() < 0;
-        boolean down = position.getY() > 500 - 100;
+        boolean down = position.getY() > MAX_HEIGHT - 100;
 
         Vector2 result = Vector2.vector(0, 0);
 

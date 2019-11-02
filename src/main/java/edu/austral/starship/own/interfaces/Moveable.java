@@ -5,5 +5,5 @@ public interface Moveable {
 
     boolean isInsideScreen(int max_height, int max_width);
 
-    void pushIn();
+    void pushIn(int MAX_HEIGHT, int MAX_WIDTH);
 }
