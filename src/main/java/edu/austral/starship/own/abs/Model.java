@@ -44,4 +44,28 @@ public abstract class Model {
     public boolean isInsideScreen(int max_height, int max_width) {
         return position.getX() > max_width || position.getX() < 0 || position.getY() > max_height || position.getY() < 0;
     }
+
+    public void pushIn() {
+        boolean left = position.getX() < 0;
+        boolean right = position.getX() > 500 - 100;
+        boolean up = position.getY() < 0;
+        boolean down = position.getY() > 500 - 100;
+
+        Vector2 result = Vector2.vector(0, 0);
+
+        if (left) {
+            result = result.add(Vector2.vector(1, 0));
+        }
+        if (right) {
+            result = result.add(Vector2.vector(-1, 0));
+        }
+        if (up) {
+            result = result.add(Vector2.vector(0, 1));
+        }
+        if (down) {
+            result = result.add(Vector2.vector(0, -1));
+        }
+
+        appliedVector = result;
+    }
 }

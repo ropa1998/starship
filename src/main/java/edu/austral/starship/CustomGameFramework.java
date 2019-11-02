@@ -56,7 +56,7 @@ public class CustomGameFramework implements GameFramework {
 
         for (Entity entity : entities) {
             if (entity.isInsideScreen(MAX_HEIGHT, MAX_WIDTH)) {
-                System.out.println("Entity is outside of screen");
+                entity.pushIn();
             }
             entity.move();
             entity.draw(graphics);

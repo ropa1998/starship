@@ -26,4 +26,8 @@ public abstract class Controller implements Entity {
     public boolean isInsideScreen(int max_height, int max_width){
         return model.isInsideScreen(max_height, max_width);
     }
+
+    public void pushIn(){
+        model.pushIn();
+    }
 }
