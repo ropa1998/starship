@@ -10,13 +10,11 @@ public abstract class Model {
 
     private Vector2 position;
 
-    public Model(Shape shape) {
-        this.shape = shape;
-        this.position = Vector2.vector(shape.getBounds().x, shape.getBounds().y);
-    }
+    private Vector2 appliedVector = Vector2.vector(0,0);
 
     public void setShape(Shape shape) {
         this.shape = shape;
+        this.position = Vector2.vector(shape.getBounds().x, shape.getBounds().y);
     }
 
     public void setPosition(Vector2 position) {
@@ -31,4 +29,15 @@ public abstract class Model {
         return shape;
     }
 
+    public void move() {
+        this.setPosition(position.add(appliedVector));
+    }
+
+    public Vector2 getAppliedVector() {
+        return appliedVector;
+    }
+
+    public void setAppliedVector(Vector2 appliedVector) {
+        this.appliedVector = appliedVector;
+    }
 }

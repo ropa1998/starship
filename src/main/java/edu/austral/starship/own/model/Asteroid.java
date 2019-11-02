@@ -8,9 +8,14 @@ import java.util.Random;
 
 public class Asteroid extends Model {
 
-    Random random = new Random();
+    private Random random = new Random();
 
     public Asteroid() {
-        super(new Rectangle(20, 30, 50, 50));
+        int x = random.nextInt(500);
+        int y = random.nextInt(500);
+        this.setShape(new Rectangle(x, y, 50, 50));
+        int vectorX = random.nextInt(10);
+        int vectorY = random.nextInt(10);
+        this.setAppliedVector(Vector2.vector(vectorX, vectorY));
     }
 }

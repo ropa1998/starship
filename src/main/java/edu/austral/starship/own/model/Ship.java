@@ -7,6 +7,6 @@ import java.awt.*;
 public class Ship extends Model {
 
     public Ship() {
-        super(new Rectangle(20, 30, 50, 50));
+        this.setShape(new Rectangle(20, 30, 50, 50));
     }
 }

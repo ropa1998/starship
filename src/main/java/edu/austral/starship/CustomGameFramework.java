@@ -55,10 +55,10 @@ public class CustomGameFramework implements GameFramework {
 
         graphics.background(80);
         for (Entity entity : entities) {
-//            entity.move();
+            entity.move();
             entity.draw(graphics);
         }
-        graphics.rect(30, 60, 30, 50);
+        shipController.move();
         shipController.draw(graphics);
     }
 

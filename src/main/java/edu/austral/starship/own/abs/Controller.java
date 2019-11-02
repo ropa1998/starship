@@ -15,7 +15,7 @@ public abstract class Controller implements Entity {
         this.view.setModel(model);
     }
 
-    public Shape getShape(){
+    public Shape getShape() {
         return model.getShape();
     }
 
@@ -27,9 +27,11 @@ public abstract class Controller implements Entity {
         return view;
     }
 
-    public void draw(PGraphics graphics){
+    public void draw(PGraphics graphics) {
         view.draw(graphics);
     }
+
+    public abstract void move();
 
 
 }

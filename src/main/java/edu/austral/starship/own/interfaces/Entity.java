@@ -2,5 +2,5 @@ package edu.austral.starship.own.interfaces;
 
 import edu.austral.starship.base.collision.Collisionable;
 
-public interface Entity extends Collisionable, Drawable {
+public interface Entity extends Collisionable, Drawable, Moveable {
 }

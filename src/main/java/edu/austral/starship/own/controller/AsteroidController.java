@@ -22,4 +22,9 @@ public class AsteroidController extends Controller {
     public void collisionedWith(Collisionable collisionable) {
 
     }
+
+    @Override
+    public void move() {
+        this.model.move();
+    }
 }
