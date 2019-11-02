@@ -19,19 +19,11 @@ public abstract class Controller implements Entity {
         return model.getShape();
     }
 
-    public Model getModel() {
-        return model;
-    }
-
-    public View getView() {
-        return view;
-    }
-
     public void draw(PGraphics graphics) {
         view.draw(graphics);
     }
 
-    public abstract void move();
-
-
+    public boolean isInsideScreen(int max_height, int max_width){
+        return model.isInsideScreen(max_height, max_width);
+    }
 }

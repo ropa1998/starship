@@ -10,7 +10,7 @@ public abstract class Model {
 
     private Vector2 position;
 
-    private Vector2 appliedVector = Vector2.vector(0,0);
+    private Vector2 appliedVector = Vector2.vector(0, 0);
 
     public void setShape(Shape shape) {
         this.shape = shape;
@@ -39,5 +39,9 @@ public abstract class Model {
 
     public void setAppliedVector(Vector2 appliedVector) {
         this.appliedVector = appliedVector;
+    }
+
+    public boolean isInsideScreen(int max_height, int max_width) {
+        return position.getX() > max_width || position.getX() < 0 || position.getY() > max_height || position.getY() < 0;
     }
 }

@@ -17,11 +17,13 @@ public class CustomGameFramework implements GameFramework {
 
     List<Entity> entities = new ArrayList<>();
     ShipController shipController;
+    int MAX_WIDTH = 500;
+    int MAX_HEIGHT = 500;
 
     @Override
     public void setup(WindowSettings windowsSettings, ImageLoader imageLoader) {
         windowsSettings
-                .setSize(500, 500);
+                .setSize(MAX_WIDTH, MAX_HEIGHT);
         shipController = new ShipController();
         for (int i = 0; i < 3; i++) {
             Entity entity = new AsteroidController();
@@ -33,33 +35,32 @@ public class CustomGameFramework implements GameFramework {
     @Override
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
         if (keySet.contains(38)) {
-            System.out.println("moving forward");
             shipController.moveForward();
         }
 
         if (keySet.contains(40)) {
-            System.out.println("moving backwards");
             shipController.moveBackward();
         }
 
         if (keySet.contains(37)) {
-            System.out.println("rotating left");
             shipController.moveLeft();
         }
 
         if (keySet.contains(39)) {
-            System.out.println("rotating right");
             shipController.moveRight();
         }
 
 
         graphics.background(80);
+
+
         for (Entity entity : entities) {
+            if (entity.isInsideScreen(MAX_HEIGHT, MAX_WIDTH)) {
+                System.out.println("Entity is outside of screen");
+            }
             entity.move();
             entity.draw(graphics);
         }
-        shipController.move();
-        shipController.draw(graphics);
     }
 
     @Override
