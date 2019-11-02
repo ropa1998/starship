@@ -21,9 +21,9 @@ public class CustomGameFramework implements GameFramework {
         windowsSettings
                 .setSize(500, 500);
         shipController = new ShipController();
-        for (int i = 0; i < 3; i++) {
-            Controller controller = new Asteroid
-        }
+//        for (int i = 0; i < 3; i++) {
+//            Controller controller = new Asteroid
+//        }
 //        entities.add(shipController);
     }
 
