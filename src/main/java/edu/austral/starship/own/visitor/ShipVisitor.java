@@ -17,7 +17,7 @@ public class ShipVisitor implements Visitor {
 
     @Override
     public void visit(AsteroidController asteroid) {
-        asteroid.get
+
     }
 
     @Override
