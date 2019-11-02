@@ -9,6 +9,8 @@ import edu.austral.starship.own.view.ShipView;
 
 public class ShipController extends Controller implements Maneuvrable {
 
+    int SHIP_SPEED = 10;
+
     public ShipController() {
         super(new Ship(), new ShipView());
     }
@@ -21,22 +23,22 @@ public class ShipController extends Controller implements Maneuvrable {
 
     @Override
     public void moveForward() {
-        this.model.setAppliedVector(model.getAppliedVector().add(Vector2.vector(0, -10)));
+        this.model.setAppliedVector(model.getAppliedVector().add(Vector2.vector(0, -SHIP_SPEED)));
     }
 
     @Override
     public void moveBackward() {
-        this.model.setAppliedVector(model.getAppliedVector().add(Vector2.vector(0, 10)));
+        this.model.setAppliedVector(model.getAppliedVector().add(Vector2.vector(0, SHIP_SPEED)));
     }
 
     @Override
     public void moveLeft() {
-        this.model.setAppliedVector(model.getAppliedVector().add(Vector2.vector(-10, 0)));
+        this.model.setAppliedVector(model.getAppliedVector().add(Vector2.vector(-SHIP_SPEED, 0)));
     }
 
     @Override
     public void moveRight() {
-        this.model.setAppliedVector(model.getAppliedVector().add(Vector2.vector(10, 0)));
+        this.model.setAppliedVector(model.getAppliedVector().add(Vector2.vector(SHIP_SPEED, 0)));
     }
 
     @Override
