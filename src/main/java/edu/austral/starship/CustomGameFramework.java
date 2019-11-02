@@ -3,17 +3,19 @@ package edu.austral.starship;
 import edu.austral.starship.base.framework.GameFramework;
 import edu.austral.starship.base.framework.ImageLoader;
 import edu.austral.starship.base.framework.WindowSettings;
-import edu.austral.starship.own.abs.Controller;
+import edu.austral.starship.own.controller.AsteroidController;
 import edu.austral.starship.own.controller.ShipController;
-import edu.austral.starship.own.model.Asteroid;
+import edu.austral.starship.own.interfaces.Entity;
 import processing.core.PGraphics;
 import processing.event.KeyEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class CustomGameFramework implements GameFramework {
 
-    //    List<Entity> entities = new ArrayList<>();
+    List<Entity> entities = new ArrayList<>();
     ShipController shipController;
 
     @Override
@@ -21,10 +23,11 @@ public class CustomGameFramework implements GameFramework {
         windowsSettings
                 .setSize(500, 500);
         shipController = new ShipController();
-//        for (int i = 0; i < 3; i++) {
-//            Controller controller = new Asteroid
-//        }
-//        entities.add(shipController);
+        for (int i = 0; i < 3; i++) {
+            Entity entity = new AsteroidController();
+            entities.add(entity);
+        }
+        entities.add(shipController);
     }
 
     @Override
@@ -51,10 +54,11 @@ public class CustomGameFramework implements GameFramework {
 
 
         graphics.background(80);
-//        for (Entity entity : entities) {
-//            entity.draw(graphics);
-//        }
-//        graphics.rect(30, 60, 30,50);
+        for (Entity entity : entities) {
+//            entity.move();
+            entity.draw(graphics);
+        }
+        graphics.rect(30, 60, 30, 50);
         shipController.draw(graphics);
     }
 

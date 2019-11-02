@@ -10,9 +10,9 @@ public abstract class Model {
 
     private Vector2 position;
 
-    public Model(Shape shape, Vector2 initialPosition) {
+    public Model(Shape shape) {
         this.shape = shape;
-        this.position = initialPosition;
+        this.position = Vector2.vector(shape.getBounds().x, shape.getBounds().y);
     }
 
     public void setShape(Shape shape) {
