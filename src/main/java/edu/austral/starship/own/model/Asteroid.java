@@ -28,4 +28,9 @@ public class Asteroid extends Model {
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
+
+    @Override
+    public boolean isAlive() {
+        return true;
+    }
 }

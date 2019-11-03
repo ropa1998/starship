@@ -10,6 +10,7 @@ public class AsteroidVisitor implements Visitor {
 
     @Override
     public void visit(Ship ship) {
+        ship.lives -= 1;
         ship.setAppliedVector(ship.getAppliedVector().multiply(-1.0f));
     }
 

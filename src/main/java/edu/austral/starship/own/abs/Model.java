@@ -83,4 +83,6 @@ public abstract class Model {
     }
 
     public abstract void accept(Visitor visitor);
+
+    public abstract boolean isAlive();
 }

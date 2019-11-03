@@ -44,4 +44,9 @@ public abstract class Controller implements Entity {
     public void collisionedWith(Entity collisionable) {
         collisionable.accept(this.getVisitor());
     }
+
+    @Override
+    public boolean shouldDraw() {
+        return model.isAlive();
+    }
 }

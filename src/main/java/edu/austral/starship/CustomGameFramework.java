@@ -40,6 +40,9 @@ public class CustomGameFramework implements GameFramework {
 
     @Override
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
+
+        List<Entity> toDelete = new ArrayList<>();
+
         if (keySet.contains(38)) {
             shipController.moveForward();
         }
@@ -67,7 +70,12 @@ public class CustomGameFramework implements GameFramework {
             }
             entity.move();
             entity.draw(graphics);
+            if (!entity.shouldDraw()) {
+                toDelete.add(entity);
+            }
         }
+
+        entities.removeAll(toDelete);
     }
 
     @Override

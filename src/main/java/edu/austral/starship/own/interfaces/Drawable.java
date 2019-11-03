@@ -4,4 +4,5 @@ import processing.core.PGraphics;
 
 public interface Drawable {
     void draw(PGraphics graphics);
+    boolean shouldDraw();
 }
