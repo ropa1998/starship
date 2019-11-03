@@ -4,9 +4,10 @@ import edu.austral.starship.base.collision.CollisionEngine;
 import edu.austral.starship.base.framework.GameFramework;
 import edu.austral.starship.base.framework.ImageLoader;
 import edu.austral.starship.base.framework.WindowSettings;
-import edu.austral.starship.own.controller.AsteroidController;
 import edu.austral.starship.own.controller.ShipController;
+import edu.austral.starship.own.factories.BasicEntityFactory;
 import edu.austral.starship.own.interfaces.Entity;
+import edu.austral.starship.own.interfaces.EntityFactory;
 import processing.core.PGraphics;
 import processing.event.KeyEvent;
 
@@ -19,6 +20,7 @@ public class CustomGameFramework implements GameFramework {
     private List<Entity> entities;
     private ShipController shipController;
     private CollisionEngine<Entity> collisionEngine;
+    private EntityFactory entityFactory;
     private int MAX_WIDTH = 1000;
     private int MAX_HEIGHT = 1000;
 
@@ -27,12 +29,12 @@ public class CustomGameFramework implements GameFramework {
         windowsSettings
                 .setSize(MAX_WIDTH, MAX_HEIGHT);
         entities = new ArrayList<>();
-        collisionEngine = new CollisionEngine<Entity>();
-        shipController = new ShipController();
+        entityFactory = new BasicEntityFactory();
+        collisionEngine = new CollisionEngine<>();
+        shipController = entityFactory.createShip();
         entities.add(shipController);
-        for (int i = 0; i < 3; i++) {
-            Entity entity = new AsteroidController();
-            entities.add(entity);
+        for (int i = 0; i < 10; i++) {
+            entities.add(entityFactory.createAsteroid());
         }
     }
 

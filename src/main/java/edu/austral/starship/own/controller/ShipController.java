@@ -1,6 +1,5 @@
 package edu.austral.starship.own.controller;
 
-import edu.austral.starship.base.collision.Collisionable;
 import edu.austral.starship.base.vector.Vector2;
 import edu.austral.starship.own.abs.Controller;
 import edu.austral.starship.own.interfaces.Entity;
