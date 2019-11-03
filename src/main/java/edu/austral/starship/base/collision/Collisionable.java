@@ -11,5 +11,5 @@ public interface Collisionable<T extends Collisionable<T>> {
 
     Visitor getVisitor();
 
-    void accept(Visitor visitor);
+    void accept(Visitor controllerVisitor);
 }

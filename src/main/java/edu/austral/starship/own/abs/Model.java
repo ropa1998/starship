@@ -1,6 +1,7 @@
 package edu.austral.starship.own.abs;
 
 import edu.austral.starship.base.vector.Vector2;
+import edu.austral.starship.own.interfaces.Visitor;
 
 import java.awt.*;
 
@@ -11,6 +12,8 @@ public abstract class Model {
     private Vector2 position;
 
     private Vector2 appliedVector = Vector2.vector(0, 0);
+
+    private Visitor visitor;
 
     public void setShape(Shape shape) {
         this.shape = shape;
@@ -30,7 +33,9 @@ public abstract class Model {
     }
 
     public void move() {
-        this.setPosition(position.add(appliedVector));
+        Vector2 newPosition = position.add(appliedVector);
+        this.setShape(new Rectangle((int) newPosition.getX(), (int) newPosition.getY(), this.getShape().getBounds().width, this.getShape().getBounds().height));
+        this.setPosition(newPosition);
     }
 
     public Vector2 getAppliedVector() {
@@ -68,4 +73,14 @@ public abstract class Model {
 
         appliedVector = result;
     }
+
+    public Visitor getVisitor() {
+        return visitor;
+    }
+
+    public void setVisitor(Visitor visitor) {
+        this.visitor = visitor;
+    }
+
+    public abstract void accept(Visitor visitor);
 }

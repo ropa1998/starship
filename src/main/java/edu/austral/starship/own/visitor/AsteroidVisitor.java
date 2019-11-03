@@ -8,8 +8,7 @@ import edu.austral.starship.own.model.Asteroid;
 import edu.austral.starship.own.model.Bullet;
 import edu.austral.starship.own.model.Ship;
 
-public class ShipVisitor implements Visitor {
-
+public class AsteroidVisitor implements Visitor {
     @Override
     public void visit(ShipController ship) {
 
@@ -27,7 +26,7 @@ public class ShipVisitor implements Visitor {
 
     @Override
     public void visit(Ship ship) {
-
+        System.out.println("Visited a ship controller as an asteroid controller");
     }
 
     @Override

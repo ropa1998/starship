@@ -2,9 +2,7 @@ package edu.austral.starship.own.controller;
 
 import edu.austral.starship.base.vector.Vector2;
 import edu.austral.starship.own.abs.Controller;
-import edu.austral.starship.own.interfaces.Entity;
 import edu.austral.starship.own.interfaces.Maneuvrable;
-import edu.austral.starship.own.interfaces.Visitor;
 import edu.austral.starship.own.model.Ship;
 import edu.austral.starship.own.view.ShipView;
 
@@ -43,18 +41,5 @@ public class ShipController extends Controller implements Maneuvrable {
         this.model.setAppliedVector(this.model.getAppliedVector().multiply((float) 0.4));
     }
 
-    @Override
-    public void collisionedWith(Entity collisionable) {
 
-    }
-
-    @Override
-    public Visitor getVisitor() {
-        return null;
-    }
-
-    @Override
-    public void accept(Visitor visitor) {
-
-    }
 }
