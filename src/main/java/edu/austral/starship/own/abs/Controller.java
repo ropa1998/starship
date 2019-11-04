@@ -1,6 +1,5 @@
 package edu.austral.starship.own.abs;
 
-import edu.austral.starship.own.interfaces.ControllerVisitor;
 import edu.austral.starship.own.interfaces.Entity;
 import edu.austral.starship.own.interfaces.Visitor;
 import processing.core.PGraphics;
@@ -16,6 +15,7 @@ public abstract class Controller implements Entity {
         this.view = view;
         this.view.setModel(model);
     }
+
 
     public Shape getShape() {
         return model.getShape();

@@ -5,9 +5,9 @@ import edu.austral.starship.own.controller.BulletController;
 import edu.austral.starship.own.controller.ShipController;
 
 public interface EntityFactory {
-    AsteroidController createAsteroid();
+    AsteroidController createAsteroid(int x, int y);
 
-    ShipController createShip();
+    ShipController createShip(int x, int y);
 
-    BulletController createBullet();
+    BulletController createBullet(int x, int y);
 }

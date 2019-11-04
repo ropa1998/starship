@@ -10,8 +10,8 @@ public class ShipController extends Controller implements Maneuvrable {
 
     private int SHIP_SPEED = 10;
 
-    public ShipController() {
-        super(new Ship(), new ShipView());
+    public ShipController(int x, int y) {
+        super(new Ship(x, y), new ShipView());
     }
 
 

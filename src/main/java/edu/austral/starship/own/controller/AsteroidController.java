@@ -7,8 +7,8 @@ import edu.austral.starship.own.view.AsteroidView;
 
 public class AsteroidController extends Controller {
 
-    public AsteroidController() {
-        super(new Asteroid(), new AsteroidView());
+    public AsteroidController(int x, int y) {
+        super(new Asteroid(x, y), new AsteroidView());
     }
 
 

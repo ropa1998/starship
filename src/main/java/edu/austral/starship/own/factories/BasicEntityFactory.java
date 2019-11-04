@@ -7,19 +7,19 @@ import edu.austral.starship.own.interfaces.EntityFactory;
 
 public class BasicEntityFactory implements EntityFactory {
 
+
     @Override
-    public AsteroidController createAsteroid() {
-        return new AsteroidController();
+    public AsteroidController createAsteroid(int x, int y) {
+        return new AsteroidController(x, y);
     }
 
     @Override
-    public ShipController createShip() {
-        return new ShipController();
+    public ShipController createShip(int x, int y) {
+        return new ShipController(x, y);
     }
 
     @Override
-    public BulletController createBullet() {
-        return null;
+    public BulletController createBullet(int x, int y) {
+        return new BulletController(x, y);
     }
-
 }

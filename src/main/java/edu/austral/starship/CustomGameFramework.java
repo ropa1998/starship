@@ -14,6 +14,7 @@ import processing.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CustomGameFramework implements GameFramework {
 
@@ -31,10 +32,10 @@ public class CustomGameFramework implements GameFramework {
         entities = new ArrayList<>();
         entityFactory = new BasicEntityFactory();
         collisionEngine = new CollisionEngine<>();
-        shipController = entityFactory.createShip();
+        shipController = entityFactory.createShip(MAX_WIDTH / 2, MAX_HEIGHT / 2);
         entities.add(shipController);
         for (int i = 0; i < 10; i++) {
-            entities.add(entityFactory.createAsteroid());
+            entities.add(entityFactory.createAsteroid(ThreadLocalRandom.current().nextInt(MAX_WIDTH), ThreadLocalRandom.current().nextInt(MAX_HEIGHT)));
         }
     }
 
@@ -57,6 +58,10 @@ public class CustomGameFramework implements GameFramework {
 
         if (keySet.contains(39)) {
             shipController.moveRight();
+        }
+
+        if (keySet.contains(32)) {
+            entities.add(entityFactory.createBullet((int) shipController.getShape().getBounds().getCenterX(), (int) shipController.getShape().getBounds().getY()));
         }
 
         collisionEngine.checkCollisions(entities);

@@ -9,9 +9,9 @@ public abstract class Model {
 
     private Shape shape;
 
-    private Vector2 position;
+    public Vector2 position;
 
-    private Vector2 appliedVector = Vector2.vector(0, 0);
+    public Vector2 appliedVector = Vector2.vector(0, 0);
 
     private Visitor visitor;
 
@@ -50,29 +50,8 @@ public abstract class Model {
         return position.getX() > max_width || position.getX() < 0 || position.getY() > max_height || position.getY() < 0;
     }
 
-    public void pushIn(int MAX_HEIGHT, int MAX_WIDTH) {
-        boolean left = position.getX() < 0;
-        boolean right = position.getX() > MAX_WIDTH - 100;
-        boolean up = position.getY() < 0;
-        boolean down = position.getY() > MAX_HEIGHT - 100;
 
-        Vector2 result = Vector2.vector(0, 0);
-
-        if (left) {
-            result = result.add(Vector2.vector(1, 0));
-        }
-        if (right) {
-            result = result.add(Vector2.vector(-1, 0));
-        }
-        if (up) {
-            result = result.add(Vector2.vector(0, 1));
-        }
-        if (down) {
-            result = result.add(Vector2.vector(0, -1));
-        }
-
-        appliedVector = result;
-    }
+    public abstract void pushIn(int MAX_HEIGHT, int MAX_WIDTH);
 
     public Visitor getVisitor() {
         return visitor;
