@@ -13,7 +13,7 @@ public class BulletVisitor implements Visitor {
 
     @Override
     public void visit(Asteroid asteroid) {
-
+        asteroid.alive = false;
     }
 
     @Override

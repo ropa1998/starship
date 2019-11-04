@@ -11,9 +11,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Asteroid extends Model {
 
+    public boolean alive;
     private Random random = new Random();
 
     public Asteroid(int x, int y) {
+        alive = true;
         this.setVisitor(new AsteroidVisitor());
         this.setShape(new Rectangle(x, y, 50, 50));
         int vectorX = ThreadLocalRandom.current().nextInt(-2, 2);
@@ -55,6 +57,6 @@ public class Asteroid extends Model {
 
     @Override
     public boolean isAlive() {
-        return true;
+        return alive;
     }
 }
