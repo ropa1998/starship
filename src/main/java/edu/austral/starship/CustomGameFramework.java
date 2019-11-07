@@ -66,7 +66,7 @@ public class CustomGameFramework implements GameFramework {
         }
 
         if (keySet.contains(32)) {
-            entities.add(entityFactory.createBullet((int) shipController.getShape().getBounds().getCenterX(), (int) shipController.getShape().getBounds().getY()));
+            entities.add(shipController.fire());
         }
 
         collisionEngine.checkCollisions(entities);

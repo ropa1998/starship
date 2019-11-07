@@ -2,6 +2,7 @@ package edu.austral.starship.own.model;
 
 import edu.austral.starship.base.vector.Vector2;
 import edu.austral.starship.own.abs.Model;
+import edu.austral.starship.own.controller.BulletController;
 import edu.austral.starship.own.interfaces.Visitor;
 import edu.austral.starship.own.visitor.BulletVisitor;
 
@@ -32,6 +33,11 @@ public class Bullet extends Model {
     @Override
     public void damage() {
         this.alive = false;
+    }
+
+    @Override
+    public BulletController fire() {
+        return null;
     }
 
 

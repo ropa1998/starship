@@ -2,11 +2,12 @@ package edu.austral.starship.own.controller;
 
 import edu.austral.starship.base.vector.Vector2;
 import edu.austral.starship.own.abs.Controller;
+import edu.austral.starship.own.interfaces.IShip;
 import edu.austral.starship.own.interfaces.Maneuvrable;
 import edu.austral.starship.own.model.Ship;
 import edu.austral.starship.own.view.ShipView;
 
-public class ShipController extends Controller implements Maneuvrable {
+public class ShipController extends Controller implements Maneuvrable, IShip {
 
     private int SHIP_SPEED = 10;
 
@@ -50,5 +51,10 @@ public class ShipController extends Controller implements Maneuvrable {
     @Override
     public void damage() {
         this.model.damage();
+    }
+
+    @Override
+    public BulletController fire() {
+        return this.model.fire();
     }
 }

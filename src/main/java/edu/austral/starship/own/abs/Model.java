@@ -1,6 +1,7 @@
 package edu.austral.starship.own.abs;
 
 import edu.austral.starship.base.vector.Vector2;
+import edu.austral.starship.own.controller.BulletController;
 import edu.austral.starship.own.interfaces.Visitor;
 
 import java.awt.*;
@@ -65,4 +66,6 @@ public abstract class Model {
     public abstract boolean isAlive();
 
     public abstract void damage();
+
+    public abstract BulletController fire();
 }
