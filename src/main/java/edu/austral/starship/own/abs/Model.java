@@ -67,5 +67,6 @@ public abstract class Model {
 
     public abstract void damage();
 
+    //TODO feardo esto, hay que arreglarlo de alguna manera.
     public abstract BulletController fire();
 }
