@@ -49,6 +49,6 @@ public class ShipController extends Controller implements Maneuvrable {
 
     @Override
     public void damage() {
-
+        this.model.damage();
     }
 }

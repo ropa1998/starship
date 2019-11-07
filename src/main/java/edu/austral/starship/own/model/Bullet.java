@@ -15,7 +15,7 @@ public class Bullet extends Model {
         alive = true;
         this.setVisitor(new BulletVisitor());
         this.setShape(new Rectangle(x, y, 10, 10));
-        this.setAppliedVector(Vector2.vector(0, -2));
+        this.setAppliedVector(Vector2.vector(0, -5));
     }
 
 

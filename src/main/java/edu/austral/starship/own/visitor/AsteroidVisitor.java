@@ -10,17 +10,17 @@ public class AsteroidVisitor implements Visitor {
 
     @Override
     public void visit(Ship ship) {
-        ship.lives -= 1;
+        ship.damage();
         ship.setAppliedVector(ship.getAppliedVector().multiply(-1.0f));
     }
 
     @Override
     public void visit(Asteroid asteroid) {
-        asteroid.setAppliedVector(asteroid.getAppliedVector().multiply(-1.0f));
+//        asteroid.setAppliedVector(asteroid.getAppliedVector().multiply(-1.0f));
     }
 
     @Override
     public void visit(Bullet bullet) {
-
+        bullet.damage();
     }
 }
