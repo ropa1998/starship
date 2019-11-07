@@ -17,4 +17,13 @@ public class AsteroidController extends Controller {
     }
 
 
+    @Override
+    public void offFrame() {
+        this.model.damage();
+    }
+
+    @Override
+    public void damage() {
+        this.model.damage();
+    }
 }

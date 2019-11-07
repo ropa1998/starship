@@ -15,6 +15,8 @@ public abstract class Model {
 
     private Visitor visitor;
 
+    private boolean alive;
+
     public void setShape(Shape shape) {
         this.shape = shape;
         this.position = Vector2.vector(shape.getBounds().x, shape.getBounds().y);
@@ -50,9 +52,6 @@ public abstract class Model {
         return position.getX() > max_width || position.getX() < 0 || position.getY() > max_height || position.getY() < 0;
     }
 
-
-    public abstract void pushIn(int MAX_HEIGHT, int MAX_WIDTH);
-
     public Visitor getVisitor() {
         return visitor;
     }
@@ -64,4 +63,6 @@ public abstract class Model {
     public abstract void accept(Visitor visitor);
 
     public abstract boolean isAlive();
+
+    public abstract void damage();
 }

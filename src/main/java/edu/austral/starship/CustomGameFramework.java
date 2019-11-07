@@ -42,6 +42,10 @@ public class CustomGameFramework implements GameFramework {
     @Override
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
 
+        for (Entity entity : entities) {
+            System.out.println(entity.toString());
+        }
+
         List<Entity> toDelete = new ArrayList<>();
 
         if (keySet.contains(38)) {
@@ -71,7 +75,7 @@ public class CustomGameFramework implements GameFramework {
 
         for (Entity entity : entities) {
             if (entity.isInsideScreen(MAX_HEIGHT, MAX_WIDTH)) {
-                entity.pushIn(MAX_HEIGHT, MAX_WIDTH);
+                entity.offFrame();
             }
             entity.move();
             entity.draw(graphics);

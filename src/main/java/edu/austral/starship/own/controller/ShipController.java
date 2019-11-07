@@ -42,4 +42,13 @@ public class ShipController extends Controller implements Maneuvrable {
     }
 
 
+    @Override
+    public void offFrame() {
+        this.model.appliedVector = this.model.appliedVector.multiply(-2f);
+    }
+
+    @Override
+    public void damage() {
+
+    }
 }

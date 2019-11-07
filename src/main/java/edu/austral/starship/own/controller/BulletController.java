@@ -16,4 +16,15 @@ public class BulletController extends Controller {
     public void move() {
         this.model.move();
     }
+
+
+    @Override
+    public void offFrame() {
+        this.model.damage();
+    }
+
+    @Override
+    public void damage() {
+        this.model.damage();
+    }
 }

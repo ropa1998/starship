@@ -18,10 +18,6 @@ public class Bullet extends Model {
         this.setAppliedVector(Vector2.vector(0, -2));
     }
 
-    @Override
-    public void pushIn(int MAX_HEIGHT, int MAX_WIDTH) {
-        alive = false;
-    }
 
     @Override
     public void accept(Visitor visitor) {
@@ -32,4 +28,11 @@ public class Bullet extends Model {
     public boolean isAlive() {
         return alive;
     }
+
+    @Override
+    public void damage() {
+        this.alive = false;
+    }
+
+
 }

@@ -29,9 +29,6 @@ public abstract class Controller implements Entity {
         return model.isInsideScreen(max_height, max_width);
     }
 
-    public void pushIn(int MAX_HEIGHT, int MAX_WIDTH) {
-        model.pushIn(MAX_HEIGHT, MAX_WIDTH);
-    }
 
     public Visitor getVisitor() {
         return model.getVisitor();
@@ -49,4 +46,13 @@ public abstract class Controller implements Entity {
     public boolean shouldDraw() {
         return model.isAlive();
     }
+
+    @Override
+    public boolean isAlive() {
+        return model.isAlive();
+    }
+
+    public abstract void offFrame();
+
+
 }
