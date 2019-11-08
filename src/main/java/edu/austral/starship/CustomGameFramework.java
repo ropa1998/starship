@@ -6,10 +6,11 @@ import edu.austral.starship.base.framework.ImageLoader;
 import edu.austral.starship.base.framework.WindowSettings;
 import edu.austral.starship.base.vector.Vector2;
 import edu.austral.starship.own.controller.ShipController;
-import edu.austral.starship.own.factories.BasicEntityFactory;
+import edu.austral.starship.own.factories.ImageEntityFactory;
 import edu.austral.starship.own.interfaces.Entity;
 import edu.austral.starship.own.interfaces.EntityFactory;
 import processing.core.PGraphics;
+import processing.core.PImage;
 import processing.event.KeyEvent;
 
 import java.util.ArrayList;
@@ -25,13 +26,27 @@ public class CustomGameFramework implements GameFramework {
     private EntityFactory entityFactory;
     private int MAX_WIDTH = 1000;
     private int MAX_HEIGHT = 1000;
+    private final String BACKGROUND_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/background.jpg";
+    private final String SHIP_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/xwing---1_1_1024x_ea5a2292-932.png";
+    private final String ASTEROID_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/better_asteroid.png";
+    private final String BULLET_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/laser.jpeg";
+    private PImage background;
+
 
     @Override
     public void setup(WindowSettings windowsSettings, ImageLoader imageLoader) {
         windowsSettings
                 .setSize(MAX_WIDTH, MAX_HEIGHT);
+
+        background = imageLoader.load(BACKGROUND_PATH);
+        background.height = MAX_HEIGHT;
+        background.width = MAX_WIDTH;
+        PImage ship = imageLoader.load(SHIP_PATH);
+        PImage asteroids = imageLoader.load(ASTEROID_PATH);
+        PImage bullets = imageLoader.load(BULLET_PATH);
+
         entities = new ArrayList<>();
-        entityFactory = new BasicEntityFactory();
+        entityFactory = new ImageEntityFactory(ship, asteroids, bullets);
         collisionEngine = new CollisionEngine<>();
         shipController = entityFactory.createShip(MAX_WIDTH / 2, MAX_HEIGHT / 2);
         entities.add(shipController);
@@ -71,7 +86,7 @@ public class CustomGameFramework implements GameFramework {
 
         collisionEngine.checkCollisions(entities);
 
-        graphics.background(80);
+        graphics.background(background);
 
 
         for (Entity entity : entities) {

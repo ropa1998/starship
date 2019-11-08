@@ -5,7 +5,9 @@ import edu.austral.starship.own.abs.Controller;
 import edu.austral.starship.own.interfaces.IShip;
 import edu.austral.starship.own.interfaces.Maneuvrable;
 import edu.austral.starship.own.model.Ship;
+import edu.austral.starship.own.view.ImageView;
 import edu.austral.starship.own.view.ShipView;
+import processing.core.PImage;
 
 public class ShipController extends Controller implements Maneuvrable, IShip {
 
@@ -13,6 +15,10 @@ public class ShipController extends Controller implements Maneuvrable, IShip {
 
     public ShipController(int x, int y) {
         super(new Ship(x, y), new ShipView());
+    }
+
+    public ShipController(int x, int y, PImage ship) {
+        super(new Ship(x, y), new ImageView(ship));
     }
 
 

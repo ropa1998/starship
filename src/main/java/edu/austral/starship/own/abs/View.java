@@ -4,6 +4,7 @@ import processing.core.PGraphics;
 
 public abstract class View {
     private Model model;
+
     public abstract void draw(PGraphics graphics);
 
     public void setModel(Model model) {
