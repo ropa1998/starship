@@ -7,8 +7,8 @@ import processing.core.PGraphics;
 import java.awt.*;
 
 public abstract class Controller implements Entity {
-    protected Model model;
-    protected View view;
+    public Model model;
+    public View view;
 
     public Controller(Model model, View view) {
         this.model = model;
@@ -55,4 +55,8 @@ public abstract class Controller implements Entity {
     public abstract void offFrame();
 
 
+    public void setView(View view) {
+        view.setModel(this.model);
+        this.view = view;
+    }
 }

@@ -5,10 +5,12 @@ import edu.austral.starship.base.framework.GameFramework;
 import edu.austral.starship.base.framework.ImageLoader;
 import edu.austral.starship.base.framework.WindowSettings;
 import edu.austral.starship.base.vector.Vector2;
+import edu.austral.starship.own.controller.BulletController;
 import edu.austral.starship.own.controller.ShipController;
 import edu.austral.starship.own.factories.ImageEntityFactory;
 import edu.austral.starship.own.interfaces.Entity;
 import edu.austral.starship.own.interfaces.EntityFactory;
+import edu.austral.starship.own.view.ImageView;
 import processing.core.PGraphics;
 import processing.core.PImage;
 import processing.event.KeyEvent;
@@ -29,8 +31,9 @@ public class CustomGameFramework implements GameFramework {
     private final String BACKGROUND_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/background.jpg";
     private final String SHIP_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/xwing---1_1_1024x_ea5a2292-932.png";
     private final String ASTEROID_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/better_asteroid.png";
-    private final String BULLET_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/laser.jpeg";
+    private final String BULLET_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/green_laser.png";
     private PImage background;
+    private PImage bullets;
 
 
     @Override
@@ -43,7 +46,7 @@ public class CustomGameFramework implements GameFramework {
         background.width = MAX_WIDTH;
         PImage ship = imageLoader.load(SHIP_PATH);
         PImage asteroids = imageLoader.load(ASTEROID_PATH);
-        PImage bullets = imageLoader.load(BULLET_PATH);
+        bullets = imageLoader.load(BULLET_PATH);
 
         entities = new ArrayList<>();
         entityFactory = new ImageEntityFactory(ship, asteroids, bullets);
@@ -81,7 +84,9 @@ public class CustomGameFramework implements GameFramework {
         }
 
         if (keySet.contains(32)) {
-            entities.add(shipController.fire());
+            BulletController bulletController = shipController.fire();
+            bulletController.setView(new ImageView(bullets));
+             entities.add(bulletController);
         }
 
         collisionEngine.checkCollisions(entities);

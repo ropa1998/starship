@@ -12,7 +12,7 @@ public class Bullet extends Model {
 
     boolean alive;
 
-    public Bullet(int x, int y) {
+    public  Bullet(int x, int y) {
         alive = true;
         this.setVisitor(new BulletVisitor());
         this.setShape(new Rectangle(x, y, 10, 10));

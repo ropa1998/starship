@@ -1,9 +1,11 @@
 package edu.austral.starship.own.model;
 
+import edu.austral.starship.base.framework.ImageLoader;
 import edu.austral.starship.own.abs.Model;
 import edu.austral.starship.own.controller.BulletController;
 import edu.austral.starship.own.interfaces.Visitor;
 import edu.austral.starship.own.visitor.ShipVisitor;
+import processing.core.PImage;
 
 import java.awt.*;
 
