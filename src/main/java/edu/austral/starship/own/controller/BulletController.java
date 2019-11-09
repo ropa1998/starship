@@ -18,6 +18,10 @@ public class BulletController extends Controller {
         super(new Bullet(x, y), new ImageView(bullet));
     }
 
+    public BulletController(Bullet bullet) {
+        super(bullet, new BulletView());
+    }
+
     @Override
     public void move() {
         this.model.move();
@@ -27,6 +31,7 @@ public class BulletController extends Controller {
     @Override
     public void offFrame() {
         this.model.damage();
+        this.model.appliedVector = this.model.appliedVector.multiply(-1f);
     }
 
     @Override

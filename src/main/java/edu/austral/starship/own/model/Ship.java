@@ -1,18 +1,19 @@
 package edu.austral.starship.own.model;
 
-import edu.austral.starship.base.framework.ImageLoader;
 import edu.austral.starship.own.abs.Model;
 import edu.austral.starship.own.controller.BulletController;
+import edu.austral.starship.own.interfaces.IWeapon;
 import edu.austral.starship.own.interfaces.Visitor;
+import edu.austral.starship.own.model.weapon.Weapon;
+import edu.austral.starship.own.model.weapon.WeaponDecorator;
 import edu.austral.starship.own.visitor.ShipVisitor;
-import processing.core.PImage;
 
 import java.awt.*;
 
 public class Ship extends Model {
 
     public int lives = 5;
-    Weapon weapon;
+    IWeapon weapon;
 
     public Ship(int x, int y) {
         this.setVisitor(new ShipVisitor());
@@ -37,6 +38,12 @@ public class Ship extends Model {
 
     @Override
     public BulletController fire() {
-        return weapon.fire(this.getPosition().getX(), this.getPosition().getY());
+        Bullet bullet = new Bullet((int) this.getPosition().getX(), (int) this.getPosition().getY());
+        return weapon.fire(bullet);
+    }
+
+    public void addPowerUp(WeaponDecorator powerUp) {
+        powerUp.setNextWeapon(weapon);
+        this.weapon = powerUp;
     }
 }

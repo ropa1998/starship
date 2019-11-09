@@ -3,6 +3,7 @@ package edu.austral.starship.own.visitor;
 import edu.austral.starship.own.interfaces.Visitor;
 import edu.austral.starship.own.model.Asteroid;
 import edu.austral.starship.own.model.Bullet;
+import edu.austral.starship.own.model.PowerUp;
 import edu.austral.starship.own.model.Ship;
 
 public class ShipVisitor implements Visitor {
@@ -21,5 +22,10 @@ public class ShipVisitor implements Visitor {
     @Override
     public void visit(Bullet bullet) {
 
+    }
+
+    @Override
+    public void visit(PowerUp powerUp) {
+        powerUp.damage();
     }
 }

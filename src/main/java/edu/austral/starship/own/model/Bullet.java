@@ -10,10 +10,10 @@ import java.awt.*;
 
 public class Bullet extends Model {
 
-    boolean alive;
+    public int lives = 1;
 
-    public  Bullet(int x, int y) {
-        alive = true;
+    public Bullet(int x, int y) {
+
         this.setVisitor(new BulletVisitor());
         this.setShape(new Rectangle(x, y, 10, 10));
         this.setAppliedVector(Vector2.vector(0, -5));
@@ -27,12 +27,12 @@ public class Bullet extends Model {
 
     @Override
     public boolean isAlive() {
-        return alive;
+        return lives != 0;
     }
 
     @Override
     public void damage() {
-        this.alive = false;
+        this.lives -= 1;
     }
 
     @Override

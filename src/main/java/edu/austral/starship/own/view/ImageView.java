@@ -14,7 +14,7 @@ public class ImageView extends View {
 
     @Override
     public void draw(PGraphics graphics) {
-//        graphics.rect(getModel().getPosition().getX(), getModel().getPosition().getY(), getModel().getShape().getBounds().height, getModel().getShape().getBounds().width);
+        graphics.rect(getModel().getPosition().getX(), getModel().getPosition().getY(), getModel().getShape().getBounds().height, getModel().getShape().getBounds().width);
         graphics.image(image, this.getModel().position.getX(), this.getModel().position.getY());
     }
 

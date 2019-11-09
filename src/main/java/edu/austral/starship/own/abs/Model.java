@@ -16,7 +16,6 @@ public abstract class Model {
 
     private Visitor visitor;
 
-    private boolean alive;
 
     public void setShape(Shape shape) {
         this.shape = shape;

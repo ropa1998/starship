@@ -28,34 +28,39 @@ public class CustomGameFramework implements GameFramework {
     private EntityFactory entityFactory;
     private int MAX_WIDTH = 1000;
     private int MAX_HEIGHT = 1000;
-    private final String BACKGROUND_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/background.jpg";
+    private final String BACKGROUND_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/death_star.jpeg";
     private final String SHIP_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/xwing---1_1_1024x_ea5a2292-932.png";
     private final String ASTEROID_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/better_asteroid.png";
     private final String BULLET_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/green_laser.png";
+    private final String POWERUP_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/rsz_1powerup.png";
     private PImage background;
     private PImage bullets;
+    private int POWERUP_PROBABILITIES = 8;
+    private int ASTEROID_PROBABILITIES = 30;
 
 
     @Override
     public void setup(WindowSettings windowsSettings, ImageLoader imageLoader) {
+        background = imageLoader.load(BACKGROUND_PATH);
+        MAX_WIDTH = background.width;
+        MAX_HEIGHT = background.height;
         windowsSettings
                 .setSize(MAX_WIDTH, MAX_HEIGHT);
-
-        background = imageLoader.load(BACKGROUND_PATH);
         background.height = MAX_HEIGHT;
         background.width = MAX_WIDTH;
         PImage ship = imageLoader.load(SHIP_PATH);
         PImage asteroids = imageLoader.load(ASTEROID_PATH);
         bullets = imageLoader.load(BULLET_PATH);
+        PImage powerUp = imageLoader.load(POWERUP_PATH);
 
         entities = new ArrayList<>();
-        entityFactory = new ImageEntityFactory(ship, asteroids, bullets);
+        entityFactory = new ImageEntityFactory(ship, asteroids, bullets, powerUp);
         collisionEngine = new CollisionEngine<>();
         shipController = entityFactory.createShip(MAX_WIDTH / 2, MAX_HEIGHT / 2);
         entities.add(shipController);
-        for (int i = 0; i < 10; i++) {
-            entities.add(entityFactory.createAsteroid(ThreadLocalRandom.current().nextInt(MAX_WIDTH), ThreadLocalRandom.current().nextInt(MAX_HEIGHT)));
-        }
+//        for (int i = 0; i < 10; i++) {
+//            entities.add(entityFactory.createAsteroid(ThreadLocalRandom.current().nextInt(MAX_WIDTH), ThreadLocalRandom.current().nextInt(MAX_HEIGHT)));
+//        }
     }
 
     @Override
@@ -86,7 +91,7 @@ public class CustomGameFramework implements GameFramework {
         if (keySet.contains(32)) {
             BulletController bulletController = shipController.fire();
             bulletController.setView(new ImageView(bullets));
-             entities.add(bulletController);
+            entities.add(bulletController);
         }
 
         collisionEngine.checkCollisions(entities);
@@ -106,12 +111,20 @@ public class CustomGameFramework implements GameFramework {
         }
 
         randomAsteroidCreation(entities, entityFactory, MAX_WIDTH, MAX_HEIGHT);
+        randomPowerUpCreation(entities, entityFactory, MAX_WIDTH, MAX_HEIGHT);
 
         entities.removeAll(toDelete);
     }
 
+    private void randomPowerUpCreation(List<Entity> entities, EntityFactory entityFactory, int max_width, int max_height) {
+        if (ThreadLocalRandom.current().nextInt(10) > POWERUP_PROBABILITIES) {
+            Vector2 edge = createRandomEdgeVector(max_width, max_height);
+            entities.add(entityFactory.createPowerUp((int) edge.getX(), (int) edge.getY()));
+        }
+    }
+
     private void randomAsteroidCreation(List<Entity> entities, EntityFactory entityFactory, int max_width, int max_height) {
-        if (ThreadLocalRandom.current().nextInt(10) > 8) {
+        if (ThreadLocalRandom.current().nextInt(10) > ASTEROID_PROBABILITIES) {
             Vector2 edge = createRandomEdgeVector(max_width, max_height);
             entities.add(entityFactory.createAsteroid((int) edge.getX(), (int) edge.getY()));
         }
