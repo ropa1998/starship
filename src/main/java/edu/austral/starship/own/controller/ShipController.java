@@ -60,7 +60,10 @@ public class ShipController extends Controller implements Maneuvrable, IShip {
     }
 
     @Override
-    public BulletController fire() {
-        return this.model.fire();
+    public BulletController fire() throws Exception {
+        if (this.isAlive()) {
+            return this.model.fire();
+        }
+        throw new Exception("This ship is dead. It cannot fire anymore");
     }
 }

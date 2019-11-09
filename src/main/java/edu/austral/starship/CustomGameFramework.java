@@ -35,7 +35,7 @@ public class CustomGameFramework implements GameFramework {
     private final String POWERUP_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/rsz_1powerup.png";
     private PImage background;
     private PImage bullets;
-    private double POWERUP_PROBABILITIES = 8.75;
+    private double POWERUP_PROBABILITIES = 8.95;
     private int ASTEROID_PROBABILITIES = 8;
 
 
@@ -89,9 +89,13 @@ public class CustomGameFramework implements GameFramework {
         }
 
         if (keySet.contains(32)) {
-            BulletController bulletController = shipController.fire();
-            bulletController.setView(new ImageView(bullets));
-            entities.add(bulletController);
+            try {
+                BulletController bulletController = shipController.fire();
+                bulletController.setView(new ImageView(bullets));
+                entities.add(bulletController);
+            } catch (Exception e) {
+                System.err.println("You have died. You cannot shoot anymore. Please reset the game.");
+            }
         }
 
         collisionEngine.checkCollisions(entities);
@@ -117,14 +121,14 @@ public class CustomGameFramework implements GameFramework {
     }
 
     private void randomPowerUpCreation(List<Entity> entities, EntityFactory entityFactory, int max_width, int max_height) {
-        if (ThreadLocalRandom.current().nextInt(10) > POWERUP_PROBABILITIES) {
+        if (ThreadLocalRandom.current().nextDouble(10) > POWERUP_PROBABILITIES) {
             Vector2 edge = createRandomEdgeVector(max_width, max_height);
             entities.add(entityFactory.createPowerUp((int) edge.getX(), (int) edge.getY()));
         }
     }
 
     private void randomAsteroidCreation(List<Entity> entities, EntityFactory entityFactory, int max_width, int max_height) {
-        if (ThreadLocalRandom.current().nextInt(10) > ASTEROID_PROBABILITIES) {
+        if (ThreadLocalRandom.current().nextDouble(10) > ASTEROID_PROBABILITIES) {
             Vector2 edge = createRandomEdgeVector(max_width, max_height);
             entities.add(entityFactory.createAsteroid((int) edge.getX(), (int) edge.getY()));
         }
