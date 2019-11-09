@@ -35,8 +35,8 @@ public class CustomGameFramework implements GameFramework {
     private final String POWERUP_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/rsz_1powerup.png";
     private PImage background;
     private PImage bullets;
-    private int POWERUP_PROBABILITIES = 8;
-    private int ASTEROID_PROBABILITIES = 30;
+    private double POWERUP_PROBABILITIES = 8.75;
+    private int ASTEROID_PROBABILITIES = 8;
 
 
     @Override

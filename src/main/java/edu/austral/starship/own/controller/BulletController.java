@@ -8,7 +8,6 @@ import processing.core.PImage;
 
 public class BulletController extends Controller {
 
-    private int SHIP_SPEED = 10;
 
     public BulletController(int x, int y) {
         super(new Bullet(x, y), new BulletView());
