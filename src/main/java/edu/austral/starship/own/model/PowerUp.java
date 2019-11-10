@@ -4,7 +4,7 @@ import edu.austral.starship.base.vector.Vector2;
 import edu.austral.starship.own.abs.Model;
 import edu.austral.starship.own.controller.BulletController;
 import edu.austral.starship.own.interfaces.Visitor;
-import edu.austral.starship.own.visitor.DoubleDamagePowerUpVisitor;
+import edu.austral.starship.own.visitor.PoweUpVisitor;
 
 import java.awt.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -13,8 +13,9 @@ public class PowerUp extends Model {
 
     boolean alive = true;
 
-    public PowerUp(int x, int y) {
-        this.setVisitor(new DoubleDamagePowerUpVisitor());
+
+    public PowerUp(int x, int y, PoweUpVisitor powerUpVisitor) {
+        this.setVisitor(powerUpVisitor);
         this.setShape(new Rectangle(x, y, 50, 50));
         int vectorX = ThreadLocalRandom.current().nextInt(-2, 2);
         int vectorY = ThreadLocalRandom.current().nextInt(-2, 2);

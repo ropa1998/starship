@@ -12,5 +12,11 @@ public interface EntityFactory {
 
     BulletController createBullet(int x, int y);
 
-    PowerUpController createPowerUp(int x, int y);
+    PowerUpController createDoubleDamagePowerUp(int x, int y);
+
+    PowerUpController createSlowerBulletsPowerUp(int x, int y);
+
+    ShipController createXwing(int x, int y);
+
+    ShipController createTieFighter(int x, int y);
 }

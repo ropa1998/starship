@@ -23,20 +23,23 @@ import java.util.concurrent.ThreadLocalRandom;
 public class CustomGameFramework implements GameFramework {
 
     private List<Entity> entities;
-    private ShipController shipController;
+    private ShipController playerOneShipController;
+    private ShipController playerTwoShipController;
     private CollisionEngine<Entity> collisionEngine;
     private EntityFactory entityFactory;
     private int MAX_WIDTH = 1000;
     private int MAX_HEIGHT = 1000;
     private final String BACKGROUND_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/death_star.jpeg";
-    private final String SHIP_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/xwing---1_1_1024x_ea5a2292-932.png";
+    private final String XWING_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/xwing---1_1_1024x_ea5a2292-932.png";
+    private final String TIE_FIGHTER_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/rsz_tie-fighter.png";
     private final String ASTEROID_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/better_asteroid.png";
     private final String BULLET_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/green_laser.png";
     private final String POWERUP_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/rsz_1powerup.png";
     private PImage background;
     private PImage bullets;
-    private double POWERUP_PROBABILITIES = 8.95;
-    private int ASTEROID_PROBABILITIES = 8;
+    private double POWERUP_PROBABILITIES = 9.95;
+    private int ASTEROID_PROBABILITIES = 9;
+    private static final boolean MULTIPLAYER = true;
 
 
     @Override
@@ -48,19 +51,24 @@ public class CustomGameFramework implements GameFramework {
                 .setSize(MAX_WIDTH, MAX_HEIGHT);
         background.height = MAX_HEIGHT;
         background.width = MAX_WIDTH;
-        PImage ship = imageLoader.load(SHIP_PATH);
+        PImage playerOneShip = imageLoader.load(XWING_PATH);
+        PImage playerTwoShip = imageLoader.load(TIE_FIGHTER_PATH);
         PImage asteroids = imageLoader.load(ASTEROID_PATH);
         bullets = imageLoader.load(BULLET_PATH);
         PImage powerUp = imageLoader.load(POWERUP_PATH);
 
         entities = new ArrayList<>();
-        entityFactory = new ImageEntityFactory(ship, asteroids, bullets, powerUp);
+        entityFactory = new ImageEntityFactory(playerOneShip, playerTwoShip, asteroids, bullets, powerUp);
         collisionEngine = new CollisionEngine<>();
-        shipController = entityFactory.createShip(MAX_WIDTH / 2, MAX_HEIGHT / 2);
-        entities.add(shipController);
-//        for (int i = 0; i < 10; i++) {
-//            entities.add(entityFactory.createAsteroid(ThreadLocalRandom.current().nextInt(MAX_WIDTH), ThreadLocalRandom.current().nextInt(MAX_HEIGHT)));
-//        }
+        playerOneShipController = entityFactory.createXwing(MAX_WIDTH / 2, MAX_HEIGHT / 2);
+        entities.add(playerOneShipController);
+
+
+        if (MULTIPLAYER) {
+            playerTwoShipController = entityFactory.createTieFighter(MAX_WIDTH / 2, MAX_HEIGHT / 2);
+            entities.add(playerTwoShipController);
+        }
+
     }
 
     @Override
@@ -73,28 +81,56 @@ public class CustomGameFramework implements GameFramework {
         List<Entity> toDelete = new ArrayList<>();
 
         if (keySet.contains(38)) {
-            shipController.moveForward();
+            playerOneShipController.moveForward();
         }
 
         if (keySet.contains(40)) {
-            shipController.moveBackward();
+            playerOneShipController.moveBackward();
         }
 
         if (keySet.contains(37)) {
-            shipController.moveLeft();
+            playerOneShipController.moveLeft();
         }
 
         if (keySet.contains(39)) {
-            shipController.moveRight();
+            playerOneShipController.moveRight();
         }
 
         if (keySet.contains(32)) {
             try {
-                BulletController bulletController = shipController.fire();
+                BulletController bulletController = playerOneShipController.fire();
                 bulletController.setView(new ImageView(bullets));
                 entities.add(bulletController);
             } catch (Exception e) {
                 System.err.println("You have died. You cannot shoot anymore. Please reset the game.");
+            }
+        }
+
+        if (MULTIPLAYER) {
+            if (keySet.contains(87)) {
+                playerTwoShipController.moveForward();
+            }
+
+            if (keySet.contains(83)) {
+                playerTwoShipController.moveBackward();
+            }
+
+            if (keySet.contains(65)) {
+                playerTwoShipController.moveLeft();
+            }
+
+            if (keySet.contains(68)) {
+                playerTwoShipController.moveRight();
+            }
+
+            if (keySet.contains(17)) {
+                try {
+                    BulletController bulletController = playerTwoShipController.fire();
+                    bulletController.setView(new ImageView(bullets));
+                    entities.add(bulletController);
+                } catch (Exception e) {
+                    System.err.println("You have died. You cannot shoot anymore. Please reset the game.");
+                }
             }
         }
 
@@ -123,7 +159,7 @@ public class CustomGameFramework implements GameFramework {
     private void randomPowerUpCreation(List<Entity> entities, EntityFactory entityFactory, int max_width, int max_height) {
         if (ThreadLocalRandom.current().nextDouble(10) > POWERUP_PROBABILITIES) {
             Vector2 edge = createRandomEdgeVector(max_width, max_height);
-            entities.add(entityFactory.createPowerUp((int) edge.getX(), (int) edge.getY()));
+            entities.add(entityFactory.createDoubleDamagePowerUp((int) edge.getX(), (int) edge.getY()));
         }
     }
 

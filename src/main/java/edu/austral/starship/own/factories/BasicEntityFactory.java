@@ -25,7 +25,22 @@ public class BasicEntityFactory implements EntityFactory {
     }
 
     @Override
-    public PowerUpController createPowerUp(int x, int y) {
+    public PowerUpController createDoubleDamagePowerUp(int x, int y) {
+        return null;
+    }
+
+    @Override
+    public PowerUpController createSlowerBulletsPowerUp(int x, int y) {
+        return null;
+    }
+
+    @Override
+    public ShipController createXwing(int x, int y) {
+        return null;
+    }
+
+    @Override
+    public ShipController createTieFighter(int x, int y) {
         return null;
     }
 }
