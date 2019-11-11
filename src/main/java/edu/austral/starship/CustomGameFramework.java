@@ -35,11 +35,16 @@ public class CustomGameFramework implements GameFramework {
     private final String ASTEROID_PATH = "src/main/java/edu/austral/starship/own/resources/better_asteroid.png";
     private final String BULLET_PATH = "src/main/java/edu/austral/starship/own/resources/green_laser.png";
     private final String POWERUP_PATH = "src/main/java/edu/austral/starship/own/resources/rsz_1powerup.png";
+    private final String REBEL_LOGO_PATH = "src/main/java/edu/austral/starship/own/resources/rsz_rebels.png";
+    private final String EMPIRE_LOGO_PATH = "src/main/java/edu/austral/starship/own/resources/rsz_empire.png";
     private PImage background;
     private PImage bullets;
+    private PImage empireLogo;
+    private PImage rebelsLogo;
     private double POWERUP_PROBABILITIES = 9.95;
     private double ASTEROID_PROBABILITIES = 9.0;
-    private static final boolean MULTIPLAYER = false;
+    private static final boolean MULTIPLAYER = true;
+    private boolean mustReset = false;
 
 
     @Override
@@ -56,17 +61,19 @@ public class CustomGameFramework implements GameFramework {
         PImage playerTwoShip = imageLoader.load(TIE_FIGHTER_PATH);
         PImage asteroids = imageLoader.load(ASTEROID_PATH);
         bullets = imageLoader.load(BULLET_PATH);
+        empireLogo = imageLoader.load(EMPIRE_LOGO_PATH);
+        rebelsLogo = imageLoader.load(REBEL_LOGO_PATH);
         PImage powerUp = imageLoader.load(POWERUP_PATH);
 
         entities = new ArrayList<>();
         entityFactory = new ImageEntityFactory(playerOneShip, playerTwoShip, asteroids, bullets, powerUp);
         collisionEngine = new CollisionEngine<>();
-        playerOneShipController = entityFactory.createXwing(MAX_WIDTH / 2, MAX_HEIGHT / 2);
+        playerOneShipController = entityFactory.createXwing(MAX_WIDTH / 2 - 20, MAX_HEIGHT / 2);
         entities.add(playerOneShipController);
 
 
         if (MULTIPLAYER) {
-            playerTwoShipController = entityFactory.createTieFighter(MAX_WIDTH / 2, MAX_HEIGHT / 2);
+            playerTwoShipController = entityFactory.createTieFighter(MAX_WIDTH / 2 - 40, MAX_HEIGHT / 2);
             entities.add(playerTwoShipController);
         }
 
@@ -75,63 +82,68 @@ public class CustomGameFramework implements GameFramework {
     @Override
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
 
+        graphics.textSize = 32;
+        graphics.fill(255);
 
         List<Entity> toDelete = new ArrayList<>();
 
-        if (keySet.contains(38)) {
-            playerOneShipController.moveForward();
-        }
-
-        if (keySet.contains(40)) {
-            playerOneShipController.moveBackward();
-        }
-
-        if (keySet.contains(37)) {
-            playerOneShipController.moveLeft();
-        }
-
-        if (keySet.contains(39)) {
-            playerOneShipController.moveRight();
-        }
-
-        if (keySet.contains(32)) {
-            try {
-
-                BulletController bulletController = playerOneShipController.fire();
-                bulletController.setView(new ImageView(bullets));
-                entities.add(bulletController);
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
-        }
-
-        if (MULTIPLAYER) {
-            if (keySet.contains(87)) {
-                playerTwoShipController.moveForward();
+        if (!mustReset) {
+            if (keySet.contains(38)) {
+                playerOneShipController.moveForward();
             }
 
-            if (keySet.contains(83)) {
-                playerTwoShipController.moveBackward();
+            if (keySet.contains(40)) {
+                playerOneShipController.moveBackward();
             }
 
-            if (keySet.contains(65)) {
-                playerTwoShipController.moveLeft();
+            if (keySet.contains(37)) {
+                playerOneShipController.moveLeft();
             }
 
-            if (keySet.contains(68)) {
-                playerTwoShipController.moveRight();
+            if (keySet.contains(39)) {
+                playerOneShipController.moveRight();
             }
 
-            if (keySet.contains(17)) {
+            if (keySet.contains(32)) {
                 try {
-                    BulletController bulletController = playerTwoShipController.fire();
+
+                    BulletController bulletController = playerOneShipController.fire();
                     bulletController.setView(new ImageView(bullets));
                     entities.add(bulletController);
                 } catch (Exception e) {
-                    System.err.println("You have died. You cannot shoot anymore. Please reset the game.");
+                    System.err.println(e.getMessage());
+                }
+            }
+
+            if (MULTIPLAYER) {
+                if (keySet.contains(87)) {
+                    playerTwoShipController.moveForward();
+                }
+
+                if (keySet.contains(83)) {
+                    playerTwoShipController.moveBackward();
+                }
+
+                if (keySet.contains(65)) {
+                    playerTwoShipController.moveLeft();
+                }
+
+                if (keySet.contains(68)) {
+                    playerTwoShipController.moveRight();
+                }
+
+                if (keySet.contains(17)) {
+                    try {
+                        BulletController bulletController = playerTwoShipController.fire();
+                        bulletController.setView(new ImageView(bullets));
+                        entities.add(bulletController);
+                    } catch (Exception e) {
+                        System.err.println("You have died. You cannot shoot anymore. Please reset the game.");
+                    }
                 }
             }
         }
+
 
         collisionEngine.checkCollisions(entities);
 
@@ -149,13 +161,31 @@ public class CustomGameFramework implements GameFramework {
             }
         }
 
-        graphics.textSize = 32;
-        graphics.fill(255);
+        //score graphics
         graphics.text("Player One Score: " + playerOneShipController.model.getPoints(), 0, 10);
 
         if (MULTIPLAYER) {
             graphics.text("Player Two Score: " + playerTwoShipController.model.getPoints(), 0, 20);
         }
+
+        //Final result text
+        if (!MULTIPLAYER) {
+            if (!playerOneShipController.isAlive()) {
+                graphics.text("You lost!", MAX_WIDTH / 2, MAX_HEIGHT / 2);
+                mustReset = true;
+            }
+        } else {
+            if (playerOneShipController.isAlive() && !playerTwoShipController.isAlive()) {
+                graphics.image(rebelsLogo, MAX_WIDTH / 2, MAX_HEIGHT / 2);
+                graphics.text("The Rebel Alliance won!", MAX_WIDTH / 2 - 20, MAX_HEIGHT / 2);
+                mustReset = true;
+            } else if (!playerOneShipController.isAlive() && playerTwoShipController.isAlive()) {
+                graphics.image(empireLogo, MAX_WIDTH / 2, MAX_HEIGHT / 2);
+                graphics.text("The Galactic Empire won!", MAX_WIDTH / 2 - 20, MAX_HEIGHT / 2);
+                mustReset = true;
+            }
+        }
+
 
         randomAsteroidCreation(entities, entityFactory, MAX_WIDTH, MAX_HEIGHT);
         randomDoubleDamageCreation(entities, entityFactory, MAX_WIDTH, MAX_HEIGHT);
