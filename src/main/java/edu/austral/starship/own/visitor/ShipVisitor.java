@@ -11,7 +11,7 @@ public class ShipVisitor implements Visitor {
 
     @Override
     public void visit(Ship ship) {
-        System.out.println("Visited a ship as a ship");
+//        System.out.println("Visited a ship as a ship");
     }
 
     @Override

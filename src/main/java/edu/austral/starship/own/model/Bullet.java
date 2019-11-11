@@ -12,8 +12,14 @@ public class Bullet extends Model {
 
     public int lives = 1;
 
-    public Bullet(int x, int y) {
-        this.setVisitor(new BulletVisitor());
+//    public Bullet(int x, int y) {
+//        this.setVisitor(new BulletVisitor());
+//        this.setShape(new Rectangle(x, y, 10, 10));
+//        this.setAppliedVector(Vector2.vector(0, -5));
+//    }
+
+    public Bullet(int x, int y, Ship ship) {
+        this.setVisitor(new BulletVisitor(ship));
         this.setShape(new Rectangle(x, y, 10, 10));
         this.setAppliedVector(Vector2.vector(0, -5));
     }
@@ -37,6 +43,11 @@ public class Bullet extends Model {
     @Override
     public BulletController fire() {
         return null;
+    }
+
+    @Override
+    public int getPoints() {
+        return 0;
     }
 
 

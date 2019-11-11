@@ -21,7 +21,8 @@ public class BasicEntityFactory implements EntityFactory {
 
     @Override
     public BulletController createBullet(int x, int y) {
-        return new BulletController(x, y);
+//        return new BulletController(x, y);
+        return null;
     }
 
     @Override

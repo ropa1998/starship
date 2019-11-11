@@ -44,4 +44,9 @@ public class Asteroid extends Model {
     public BulletController fire() {
         return null;
     }
+
+    @Override
+    public int getPoints() {
+        return 0;
+    }
 }

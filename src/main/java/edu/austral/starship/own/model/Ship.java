@@ -14,6 +14,7 @@ public class Ship extends Model {
 
     public int lives = 5;
     IWeapon weapon;
+    int points;
 
     public Ship(int x, int y) {
         this.setVisitor(new ShipVisitor());
@@ -38,12 +39,20 @@ public class Ship extends Model {
 
     @Override
     public BulletController fire() throws Exception {
-        Bullet bullet = new Bullet((int) this.getPosition().getX(), (int) this.getPosition().getY());
+        Bullet bullet = new Bullet((int) this.getPosition().getX(), (int) this.getPosition().getY(), this);
         return weapon.fire(bullet);
     }
 
     public void addPowerUp(WeaponDecorator powerUp) {
         powerUp.setNextWeapon(weapon);
         this.weapon = powerUp;
+    }
+
+    public void addPoints(int points) {
+        this.points += points;
+    }
+
+    public int getPoints() {
+        return points;
     }
 }

@@ -15,7 +15,6 @@ import processing.core.PGraphics;
 import processing.core.PImage;
 import processing.event.KeyEvent;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -41,7 +40,6 @@ public class CustomGameFramework implements GameFramework {
     private double POWERUP_PROBABILITIES = 9.95;
     private double ASTEROID_PROBABILITIES = 9.5;
     private static final boolean MULTIPLAYER = true;
-
 
 
     @Override
@@ -76,9 +74,16 @@ public class CustomGameFramework implements GameFramework {
     @Override
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
 
-        for (Entity entity : entities) {
-            System.out.println(entity.toString());
+
+        System.out.println(playerOneShipController.model.getPoints());
+
+        graphics.textSize = 32;
+        graphics.fill(255);
+        graphics.text("Player One Score: " + playerOneShipController.model.getPoints(), MAX_WIDTH / 2, MAX_HEIGHT / 2);
+        if (MULTIPLAYER) {
+            graphics.text("Player Two Score: " + playerTwoShipController.model.getPoints(), MAX_WIDTH / 2, MAX_HEIGHT / 2);
         }
+
 
         List<Entity> toDelete = new ArrayList<>();
 
@@ -105,7 +110,7 @@ public class CustomGameFramework implements GameFramework {
                 bulletController.setView(new ImageView(bullets));
                 entities.add(bulletController);
             } catch (Exception e) {
-                System.err.println("You have died. You cannot shoot anymore. Please reset the game.");
+                System.err.println(e.getMessage());
             }
         }
 

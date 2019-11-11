@@ -68,4 +68,6 @@ public abstract class Model {
 
     //TODO feardo esto, hay que arreglarlo de alguna manera.
     public abstract BulletController fire() throws Exception;
+
+    public abstract int getPoints();
 }

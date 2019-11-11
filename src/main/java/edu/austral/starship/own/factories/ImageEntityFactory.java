@@ -38,7 +38,8 @@ public class ImageEntityFactory implements EntityFactory {
 
     @Override
     public BulletController createBullet(int x, int y) {
-        return new BulletController(x, y, bullet);
+//        return new BulletController(x, y, bullet);
+        return null;
     }
 
     @Override

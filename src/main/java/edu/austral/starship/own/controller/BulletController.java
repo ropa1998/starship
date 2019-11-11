@@ -9,13 +9,13 @@ import processing.core.PImage;
 public class BulletController extends Controller {
 
 
-    public BulletController(int x, int y) {
-        super(new Bullet(x, y), new BulletView());
-    }
-
-    public BulletController(int x, int y, PImage bullet) {
-        super(new Bullet(x, y), new ImageView(bullet));
-    }
+//    public BulletController(int x, int y) {
+//        super(new Bullet(x, y), new BulletView());
+//    }
+//
+//    public BulletController(int x, int y, PImage bullet) {
+//        super(new Bullet(x, y), new ImageView(bullet));
+//    }
 
     public BulletController(Bullet bullet) {
         super(bullet, new BulletView());
