@@ -13,7 +13,6 @@ public class Bullet extends Model {
     public int lives = 1;
 
     public Bullet(int x, int y) {
-
         this.setVisitor(new BulletVisitor());
         this.setShape(new Rectangle(x, y, 10, 10));
         this.setAppliedVector(Vector2.vector(0, -5));

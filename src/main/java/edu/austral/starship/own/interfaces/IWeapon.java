@@ -5,5 +5,5 @@ import edu.austral.starship.own.model.Bullet;
 
 public interface IWeapon {
 
-    public BulletController fire(Bullet bullet);
+    public BulletController fire(Bullet bullet) throws Exception;
 }

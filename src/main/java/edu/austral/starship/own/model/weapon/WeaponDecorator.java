@@ -9,7 +9,7 @@ public abstract class WeaponDecorator implements IWeapon {
     IWeapon nextWeapon;
 
     @Override
-    public abstract BulletController fire(Bullet bullet);
+    public abstract BulletController fire(Bullet bullet) throws Exception;
 
     public void setNextWeapon(IWeapon nextWeapon) {
         this.nextWeapon = nextWeapon;

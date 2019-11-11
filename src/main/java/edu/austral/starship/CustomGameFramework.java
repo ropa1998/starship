@@ -15,6 +15,7 @@ import processing.core.PGraphics;
 import processing.core.PImage;
 import processing.event.KeyEvent;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -38,8 +39,9 @@ public class CustomGameFramework implements GameFramework {
     private PImage background;
     private PImage bullets;
     private double POWERUP_PROBABILITIES = 9.95;
-    private int ASTEROID_PROBABILITIES = 9;
+    private double ASTEROID_PROBABILITIES = 9.5;
     private static final boolean MULTIPLAYER = true;
+
 
 
     @Override
@@ -98,6 +100,7 @@ public class CustomGameFramework implements GameFramework {
 
         if (keySet.contains(32)) {
             try {
+
                 BulletController bulletController = playerOneShipController.fire();
                 bulletController.setView(new ImageView(bullets));
                 entities.add(bulletController);

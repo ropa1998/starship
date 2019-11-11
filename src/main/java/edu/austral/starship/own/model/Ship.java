@@ -37,7 +37,7 @@ public class Ship extends Model {
     }
 
     @Override
-    public BulletController fire() {
+    public BulletController fire() throws Exception {
         Bullet bullet = new Bullet((int) this.getPosition().getX(), (int) this.getPosition().getY());
         return weapon.fire(bullet);
     }

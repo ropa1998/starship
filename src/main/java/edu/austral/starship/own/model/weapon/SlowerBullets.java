@@ -5,7 +5,7 @@ import edu.austral.starship.own.model.Bullet;
 
 public class SlowerBullets extends WeaponDecorator {
     @Override
-    public BulletController fire(Bullet bullet) {
+    public BulletController fire(Bullet bullet) throws Exception {
         bullet.appliedVector = bullet.appliedVector.multiply(.5f);
         return this.nextWeapon.fire(bullet);
     }
