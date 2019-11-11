@@ -17,7 +17,10 @@ public class BulletVisitor implements Visitor {
 
     @Override
     public void visit(Ship ship) {
-
+        if (!(ship == this.ship)) {
+            ship.damage();
+            this.ship.addPoints(100);
+        }
     }
 
     @Override

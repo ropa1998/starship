@@ -39,7 +39,7 @@ public class CustomGameFramework implements GameFramework {
     private PImage bullets;
     private double POWERUP_PROBABILITIES = 9.95;
     private double ASTEROID_PROBABILITIES = 9.0;
-    private static final boolean MULTIPLAYER = true;
+    private static final boolean MULTIPLAYER = false;
 
 
     @Override
@@ -74,8 +74,6 @@ public class CustomGameFramework implements GameFramework {
 
     @Override
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
-
-        System.out.println(playerOneShipController.model.getPoints());
 
 
         List<Entity> toDelete = new ArrayList<>();
@@ -185,7 +183,6 @@ public class CustomGameFramework implements GameFramework {
 
     private Vector2 createRandomEdgeVector(int max_width, int max_height) {
         double random = ThreadLocalRandom.current().nextDouble(0, 1);
-        System.out.println(random);
         if (fiftyFiftyChance()) {
             //widht va a ser extremo, height va a ser random
             if (fiftyFiftyChance()) {

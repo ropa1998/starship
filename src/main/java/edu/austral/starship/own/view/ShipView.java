@@ -10,6 +10,5 @@ public class ShipView extends View {
     public void draw(PGraphics graphics) {
         graphics.fill(60);
         graphics.rect(getModel().getPosition().getX(), getModel().getPosition().getY(), getModel().getShape().getBounds().height, getModel().getShape().getBounds().width);
-        System.out.println(this.getModel().getPoints());
     }
 }

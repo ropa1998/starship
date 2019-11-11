@@ -19,9 +19,18 @@ public class Asteroid extends Model {
         alive = true;
         this.setVisitor(new AsteroidVisitor());
         this.setShape(new Rectangle(x, y, 50, 50));
-        int vectorX = ThreadLocalRandom.current().nextInt(-2, 2);
-        int vectorY = ThreadLocalRandom.current().nextInt(-2, 2);
-        this.setAppliedVector(Vector2.vector(vectorX, vectorY));
+        Vector2 vector2 = getNot0Vector();
+        this.setAppliedVector(Vector2.vector(vector2.getX(), vector2.getY()));
+    }
+
+    private Vector2 getNot0Vector() {
+        int vectorX = 0;
+        int vectorY = 0;
+        while (vectorX + vectorY == 0) {
+            vectorX = ThreadLocalRandom.current().nextInt(-2, 2);
+            vectorY = ThreadLocalRandom.current().nextInt(-2, 2);
+        }
+        return Vector2.vector(vectorX, vectorY);
     }
 
 
