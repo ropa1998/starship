@@ -29,21 +29,22 @@ public class CustomGameFramework implements GameFramework {
     private EntityFactory entityFactory;
     private int MAX_WIDTH = 1000;
     private int MAX_HEIGHT = 1000;
-    private final String BACKGROUND_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/death_star.jpeg";
-    private final String XWING_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/xwing---1_1_1024x_ea5a2292-932.png";
-    private final String TIE_FIGHTER_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/rsz_tie-fighter.png";
-    private final String ASTEROID_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/better_asteroid.png";
-    private final String BULLET_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/green_laser.png";
-    private final String POWERUP_PATH = "/home/rodrigo/projects/starships/src/main/java/edu/austral/starship/own/resources/rsz_1powerup.png";
+    private final String BACKGROUND_PATH = "src/main/java/edu/austral/starship/own/resources/death_star.jpeg";
+    private final String XWING_PATH = "src/main/java/edu/austral/starship/own/resources/xwing---1_1_1024x_ea5a2292-932.png";
+    private final String TIE_FIGHTER_PATH = "src/main/java/edu/austral/starship/own/resources/rsz_tie-fighter.png";
+    private final String ASTEROID_PATH = "src/main/java/edu/austral/starship/own/resources/better_asteroid.png";
+    private final String BULLET_PATH = "src/main/java/edu/austral/starship/own/resources/green_laser.png";
+    private final String POWERUP_PATH = "src/main/java/edu/austral/starship/own/resources/rsz_1powerup.png";
     private PImage background;
     private PImage bullets;
     private double POWERUP_PROBABILITIES = 9.95;
-    private double ASTEROID_PROBABILITIES = 9.5;
+    private double ASTEROID_PROBABILITIES = 9.0;
     private static final boolean MULTIPLAYER = true;
 
 
     @Override
     public void setup(WindowSettings windowsSettings, ImageLoader imageLoader) {
+
         background = imageLoader.load(BACKGROUND_PATH);
         MAX_WIDTH = background.width;
         MAX_HEIGHT = background.height;
@@ -74,15 +75,7 @@ public class CustomGameFramework implements GameFramework {
     @Override
     public void draw(PGraphics graphics, float timeSinceLastDraw, Set<Integer> keySet) {
 
-
         System.out.println(playerOneShipController.model.getPoints());
-
-        graphics.textSize = 32;
-        graphics.fill(255);
-        graphics.text("Player One Score: " + playerOneShipController.model.getPoints(), MAX_WIDTH / 2, MAX_HEIGHT / 2);
-        if (MULTIPLAYER) {
-            graphics.text("Player Two Score: " + playerTwoShipController.model.getPoints(), MAX_WIDTH / 2, MAX_HEIGHT / 2);
-        }
 
 
         List<Entity> toDelete = new ArrayList<>();
@@ -156,6 +149,14 @@ public class CustomGameFramework implements GameFramework {
             if (!entity.shouldDraw()) {
                 toDelete.add(entity);
             }
+        }
+
+        graphics.textSize = 32;
+        graphics.fill(255);
+        graphics.text("Player One Score: " + playerOneShipController.model.getPoints(), 0, 10);
+
+        if (MULTIPLAYER) {
+            graphics.text("Player Two Score: " + playerTwoShipController.model.getPoints(), 0, 20);
         }
 
         randomAsteroidCreation(entities, entityFactory, MAX_WIDTH, MAX_HEIGHT);
