@@ -160,12 +160,12 @@ public class CustomGameFramework implements GameFramework {
         }
 
         randomAsteroidCreation(entities, entityFactory, MAX_WIDTH, MAX_HEIGHT);
-        randomPowerUpCreation(entities, entityFactory, MAX_WIDTH, MAX_HEIGHT);
+        randomDoubleDamageCreation(entities, entityFactory, MAX_WIDTH, MAX_HEIGHT);
 
         entities.removeAll(toDelete);
     }
 
-    private void randomPowerUpCreation(List<Entity> entities, EntityFactory entityFactory, int max_width, int max_height) {
+    private void randomDoubleDamageCreation(List<Entity> entities, EntityFactory entityFactory, int max_width, int max_height) {
         if (ThreadLocalRandom.current().nextDouble(10) > POWERUP_PROBABILITIES) {
             Vector2 edge = createRandomEdgeVector(max_width, max_height);
             entities.add(entityFactory.createDoubleDamagePowerUp((int) edge.getX(), (int) edge.getY()));
