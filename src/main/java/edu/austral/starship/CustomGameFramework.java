@@ -73,7 +73,7 @@ public class CustomGameFramework implements GameFramework {
 
 
         if (MULTIPLAYER) {
-            playerTwoShipController = entityFactory.createTieFighter(MAX_WIDTH / 2 - 40, MAX_HEIGHT / 2);
+            playerTwoShipController = entityFactory.createTieFighter(MAX_WIDTH / 2 - 100, MAX_HEIGHT / 2);
             entities.add(playerTwoShipController);
         }
 
@@ -106,7 +106,6 @@ public class CustomGameFramework implements GameFramework {
 
             if (keySet.contains(32)) {
                 try {
-
                     BulletController bulletController = playerOneShipController.fire();
                     bulletController.setView(new ImageView(bullets));
                     entities.add(bulletController);
